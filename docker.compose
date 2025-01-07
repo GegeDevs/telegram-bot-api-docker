@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  server:
+    image: gegedesembri/telegram-bot-api:latest
+    environment:
+      TELEGRAM_API_ID: "<replace_with_your_api_id>"
+      TELEGRAM_API_HASH: "<replace_with_your_api_hash>"
+    volumes:
+      - telegram-bot-api-data:/var/lib/telegram-bot-api
+    ports:
+      - "8081:8081"
+
+volumes:
+  telegram-bot-api-data:
