@@ -29,4 +29,4 @@ jobs:
       run: docker buildx create --name="multi-builder" --platform="linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/386"
       
     - name: Build the Docker image
-      run: ./build.sh
+      run: sudo chmod +x ./build.sh && sudo ./build.sh
