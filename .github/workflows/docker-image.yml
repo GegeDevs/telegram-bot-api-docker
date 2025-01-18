@@ -1,13 +1,6 @@
 name: Docker Image CI
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: 'Build Image Multi Platform with Buildx'
-        default: 'World'
-        required: true
-        type: string
-
 jobs:
   build:
     runs-on: ubuntu-latest
