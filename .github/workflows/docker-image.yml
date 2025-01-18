@@ -23,9 +23,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
         
     - name: Create Buildx [multi-builder]
-      uses: actions/checkout@v4
       run: docker buildx create --name="multi-builder" --platform="linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/386"
       
     - name: Build the Docker image
-      uses: actions/checkout@v4
       run: docker buildx build --push --builder="multi-builder" --platform="linux/amd64" --tag="gegedesembri/telegram-bot-api:latest" --tag="gegedesembri/telegram-bot-api:0.3" .
