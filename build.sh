@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # Core Parameter
-use_tag="gegedesembri/telegram-bot-api:0.2"
+author="gegedesembri"
+name="telegram-bot-api"
+version="0.3"
+repo="${author}/${name}"
+use_tag="${repo}:${version}"
 use_builder="multi-builder"
 target_platform_list="linux/amd64,linux/386,linux/arm64,linux/arm/v8,linux/arm/v7,linux/arm/v6,linux/ppc64le"
 
@@ -14,7 +18,7 @@ function buildx_sequence(){
 	docker buildx build \
 		--builder="${buildxer}" \
 		--platform="${target_platform}" \
-		--tag="gegedesembri/telegram-bot-api:latest" \
+		--tag="${repo}:latest" \
 		--tag="${tag_name}" .
 }
 
@@ -44,7 +48,7 @@ function buildx_push(){
 		--push \
 		--builder="${buildxer}" \
 		--platform="${push_platform}" \
-		--tag="gegedesembri/telegram-bot-api:latest" \
+		--tag="${repo}:latest" \
 		--tag="${tag_name}" .
 }
 
