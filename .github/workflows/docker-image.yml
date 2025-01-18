@@ -14,5 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Create Buildx [multi-builder]
+      run: docker buildx create --name="multi-builder" --platform="linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/386"
+      
+    - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker buildx build --push --builder="multi-builder" --platform="linux/amd64" --tag="gegedesembri/telegram-bot-api:latest" --tag="gegedesembri/telegram-bot-api:0.3" .
