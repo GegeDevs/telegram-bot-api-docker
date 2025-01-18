@@ -13,10 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Check out the repo
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        
     - name: Create Buildx [multi-builder]
+      uses: actions/checkout@v4
       run: docker buildx create --name="multi-builder" --platform="linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/386"
       
-    - uses: actions/checkout@v4
     - name: Build the Docker image
+      uses: actions/checkout@v4
       run: docker buildx build --push --builder="multi-builder" --platform="linux/amd64" --tag="gegedesembri/telegram-bot-api:latest" --tag="gegedesembri/telegram-bot-api:0.3" .
