@@ -12,16 +12,13 @@ RUN apk add bc curl git wget binutils linux-headers && \
 	cp -r $(which telegram-bot-api) /builded && \
 	strip /builded/telegram-bot-api
 
-FROM nginx:1.29.1-alpine
+FROM alpine:latest
 
 ENV	TELEGRAM_WORK_DIR="/var/lib/telegram-bot-api" \
 	TELEGRAM_TEMP_DIR="/tmp/telegram-bot-api"
 
 RUN apk add --no-cache --update openssl libstdc++
 COPY --from=builder /builded/telegram-bot-api /usr/local/bin/telegram-bot-api
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY telegram-bot-api.sh /telegram-bot-api.sh
-COPY nginx.sh /nginx.sh
 COPY entrypoint.sh /entrypoint.sh
 
 RUN addgroup -g 101 -S telegram-bot-api && \
@@ -30,5 +27,5 @@ RUN addgroup -g 101 -S telegram-bot-api && \
 	mkdir -p ${TELEGRAM_WORK_DIR} ${TELEGRAM_TEMP_DIR} && \
 	chown telegram-bot-api:telegram-bot-api ${TELEGRAM_WORK_DIR} ${TELEGRAM_TEMP_DIR}
 
-EXPOSE 80/tcp
+EXPOSE 8081/tcp 8082/tcp
 ENTRYPOINT ["/entrypoint.sh"]
