@@ -24,8 +24,8 @@ COPY telegram-bot-api.sh /telegram-bot-api.sh
 COPY nginx.sh /nginx.sh
 COPY entrypoint.sh /entrypoint.sh
 
-RUN addgroup -g 101 -S telegram-bot-api && \
-	adduser -S -D -H -u 101 -h ${TELEGRAM_WORK_DIR} -s /sbin/nologin -G telegram-bot-api -g telegram-bot-api telegram-bot-api && \
+RUN addgroup -g 102 -S telegram-bot-api && \
+	adduser -S -D -H -u 102 -h ${TELEGRAM_WORK_DIR} -s /sbin/nologin -G telegram-bot-api -g telegram-bot-api telegram-bot-api && \
 	chmod +x /entrypoint.sh && \
 	mkdir -p ${TELEGRAM_WORK_DIR} ${TELEGRAM_TEMP_DIR} && \
 	chown telegram-bot-api:telegram-bot-api ${TELEGRAM_WORK_DIR} ${TELEGRAM_TEMP_DIR}
