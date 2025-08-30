@@ -1,18 +1,15 @@
-name: Docker Image CI
+name: Builder
 on:
   workflow_dispatch:
     inputs:
       tag:
         description: "Tag for the Docker image"
         required: true
-        default: debug
+        default: core
         type: choice
         options:
-          - debug
-          - stable
-          - beta
-          - nightly
-          - latest
+          - core
+          - nginx
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,4 +24,4 @@ jobs:
     - name: Create Buildx [multi-builder]
       run: docker buildx create --name="multi-builder" --platform="linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/386"
     - name: Build the Docker image
-      run: docker buildx build --push --builder="multi-builder" --platform="linux/amd64,linux/386,linux/arm64,linux/arm/v8,linux/arm/v7,linux/arm/v6,linux/ppc64le" --tag="gegedesembri/telegram-bot-api:${{ inputs.tag }}" .
+      run: docker buildx build --f Dockerfile.core --push --builder="multi-builder" --platform="linux/amd64,linux/386,linux/arm64,linux/arm/v8,linux/arm/v7,linux/arm/v6,linux/ppc64le" --tag="gegedesembri/telegram-bot-api:{{ inputs.tag }}" .

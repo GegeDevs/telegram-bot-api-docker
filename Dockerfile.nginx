@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM gegedesembri/telegram-bot-api:latest AS builder
+FROM --platform=$BUILDPLATFORM gegedesembri/telegram-bot-api:core AS builder
 
 FROM nginx:1.29.1-alpine
 
