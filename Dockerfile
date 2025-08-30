@@ -19,4 +19,4 @@ RUN addgroup -g 102 -S telegram-bot-api && \
 
 EXPOSE 80/tcp
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["nginx", "-g", "'daemon off;'"]
+# CMD ["nginx", "-g", "daemon off;"]
