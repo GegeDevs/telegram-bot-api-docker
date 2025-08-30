@@ -9,7 +9,6 @@ RUN apk add --no-cache --update openssl libstdc++
 COPY --from=builder /usr/local/bin/telegram-bot-api /usr/local/bin/telegram-bot-api
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY telegram-bot-api.sh /telegram-bot-api.sh
-COPY nginx.sh /nginx.sh
 COPY entrypoint.sh /entrypoint.sh
 
 RUN addgroup -g 102 -S telegram-bot-api && \
