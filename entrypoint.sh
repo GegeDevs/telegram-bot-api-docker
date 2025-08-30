@@ -1,3 +1,3 @@
 #!/bin/sh
-/telegram-bot-api.sh &
+/telegram-bot-api.sh
 /docker-entrypoint.sh
